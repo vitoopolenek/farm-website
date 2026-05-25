@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #fafaf8;
+  --bg-subtle: #f4f4f1;
+  --ink: #141414;
+  --muted: #6e6e68;
+  --accent: #2f4f3a;
+  --accent-hover: #243d2f;
+  --line: #e6e6e2;
+  --card: #ffffff;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-subtle: var(--bg-subtle);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-line: var(--line);
+  --color-card: var(--card);
+  --color-forest: var(--accent);
+  --color-forest-dark: var(--accent-hover);
+  --color-bark-muted: var(--muted);
+  --color-apple: #9a4a42;
+  --font-sans: var(--font-body), system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  font-family: var(--font-body), system-ui, sans-serif;
+  color: var(--ink);
+  background-color: var(--bg);
+}
+
+::selection {
+  background-color: rgb(47 79 58 / 0.15);
+  color: var(--ink);
+}
+
+.surface-card {
+  border: 1px solid var(--line);
+  background: var(--card);
+}
+
+.btn-primary {
+  background: var(--accent);
+}
+
+.btn-primary:hover {
+  background: var(--accent-hover);
+}
+
+.gallery-tone-orchard,
+.gallery-tone-trees,
+.gallery-tone-harvest,
+.gallery-tone-farm,
+.gallery-tone-cherries,
+.gallery-tone-season {
+  background: var(--bg-subtle);
+}
+
+/* Scroll story: progress line driven by section scroll */
+@supports (animation-timeline: view()) {
+  .story-progress-fill {
+    animation: story-progress-grow linear both;
+    animation-timeline: view();
+    animation-range: entry 0% exit 100%;
+  }
+
+  @keyframes story-progress-grow {
+    from {
+      transform: scaleY(0);
+    }
+    to {
+      transform: scaleY(1);
+    }
+  }
+}
+
+.story-beat-in {
+  transition:
+    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.story-beat-out {
+  opacity: 0.15;
+  transform: translateY(2rem);
+}
+
+.story-beat-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .story-beat-out,
+  .story-beat-active {
+    opacity: 1;
+    transform: none;
+  }
+
+  .story-progress-fill {
+    transform: scaleY(1);
+    animation: none;
+  }
+}
